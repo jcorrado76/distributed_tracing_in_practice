@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "distributed-tracing-in-practice"
+version = "0.1.0"
+description = ""
+authors = ["Joseph Corrado <josephcorrado7@gmail.com>"]
+readme = "README.md"
+packages = [{include = "distributed_tracing_in_practice"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+flask = "^2.3.1"
+opentelemetry-distro = "^0.38b0"
+fastapi = "^0.95.1"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
