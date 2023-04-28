@@ -4,12 +4,25 @@ This module contains a custom sink for loguru that sends logs to OpenTelemetry.
 
 from loguru import logger
 from opentelemetry import trace
-from opentelemetry.exporter.otlp.proto.grpc.trace_exporter import OTLPSpanExporter
-from opentelemetry.sdk.trace import TracerProvider
-from opentelemetry.sdk.trace.export import BatchSpanProcessor
 
 
 def get_ot_logger():
+    """
+    This method returns a logger with a function that sinks to OpenTelemetry.
+
+    Todo: Allow for a lot more things to be injected so the user can configure
+    the parameters send to open telemetry:
+    * TracerProvider()
+    * BatchSpanProcessor()
+    * OLTPSpanExporter()
+
+    So you can configure like this:
+    from loguru import logger
+    from opentelemetry import trace
+    from opentelemetry.sdk.trace import TracerProvider
+    from opentelemetry.sdk.trace.export import BatchSpanProcessor
+    from opentelemetry.exporter.otlp.proto.grpc.trace_exporter import OTLPSpanExporter
+
     # Configure the OpenTelemetry Tracer
     trace.set_tracer_provider(TracerProvider())
     tracer = trace.get_tracer(__name__)
@@ -18,6 +31,8 @@ def get_ot_logger():
     otlp_exporter = OTLPSpanExporter()
     span_processor = BatchSpanProcessor(otlp_exporter)
     trace.get_tracer_provider().add_span_processor(span_processor)
+    """
+    tracer = trace.get_tracer(__name__)
 
     # Custom Loguru sink function
     def otel_sink(message):
