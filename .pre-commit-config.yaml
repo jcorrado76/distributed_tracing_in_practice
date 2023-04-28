@@ -1,0 +1,38 @@
+repos:
+-   repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.4.0
+    hooks:
+    -   id: trailing-whitespace
+    -   id: end-of-file-fixer
+    -   id: check-yaml
+    -   id: debug-statements
+    -   id: double-quote-string-fixer
+    -   id: name-tests-test
+        args:
+          - "--pytest-test-first"
+    -   id: requirements-txt-fixer
+- repo: local
+  hooks:
+  - id: isort
+    name: isort
+    entry: isort
+    language: system
+    types: [python]
+- repo: local
+  hooks:
+  - id: black
+    name: black
+    entry: black
+    language: system
+    types: [python]
+- repo: https://github.com/Lucas-C/pre-commit-hooks-nodejs
+  rev: v1.1.2
+  hooks:
+  - id: markdown-toc
+    # optional custom config:
+    args: [--indent, "    ", -i]
+- repo: https://github.com/markdownlint/markdownlint.git
+  rev: v0.12.0
+  hooks:
+  - id: markdownlint
+    args: [--config, .markdownlint.json]
